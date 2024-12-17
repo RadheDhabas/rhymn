@@ -1,0 +1,187 @@
+.com_banner {
+    background: #000;
+    padding: 70px 0 0;
+}
+
+.banner_head {
+    font-size: 70px;
+    line-height: 80px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.banner_subt {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #fff;
+    margin: 10px 0 50px;
+}
+
+.com_steps {
+    border-top: 2px solid #39045E;
+    padding: 20px 0 0;
+}
+
+.step_num {
+    display: inline-block;
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 24px;
+    color: #000;
+    background: #fff;
+    border-radius: 100%;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.step_path {
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 36px;
+    margin: 0 0 30px;
+}
+
+.explore {
+    background: #39045E;
+    padding: 35px 0;
+    margin-bottom: 50px;
+}
+
+.explore_h {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 50px;
+    color: #fff;
+    margin: 0;
+}
+
+.explore_t {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #fff;
+    margin: 10px 0 0;
+}
+
+.explore_btn {
+    display: inline-block;
+    background: #fff;
+    color: #000 !important;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 0;
+    text-align: center;
+    border-radius: 50px;
+    text-decoration: none;
+    width: 170px;
+}
+
+.path_desc {
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 500;
+    color: #fff;
+    margin: 20px 0 30px;
+}
+
+.bottom_desc {
+    margin: 30px 0;
+    font-size: 30px;
+    line-height: 45px;
+    color: #FFF;
+    font-weight: 600;
+    text-align: center;
+}
+
+@media (min-width:200px) and (max-width:768px) {
+    .com_banner {
+        padding: 30px 0 0;
+    }
+
+    .banner_head {
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    .banner_subt {
+        margin: 10px 0 30px;
+    }
+
+    .step_num {
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        font-size: 18px;
+        margin: 0 10px 0px 0;
+    }
+
+    .com_steps {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    .step_path {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 30px;
+    }
+
+    .explore {
+        padding: 25px 0 35px;
+        margin-bottom: 30px;
+    }
+
+    .explore_h {
+        font-size: 28px;
+        line-height: 40px;
+    }
+
+    .explore_t {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 30px;
+        margin: 8px 0 25px;
+    }
+
+    .comunity_img {
+        text-align: center;
+    }
+
+    .comunity_img img {
+        width: 90%;
+        height: auto;
+    }
+
+    .path_content {
+        margin: 20px 0;
+    }
+
+    .path_content .step_num {
+        margin-bottom: 10px;
+    }
+
+    .path_content .explore_h {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .path_desc {
+        font-size: 16px;
+        line-height: 24px;
+        margin: 10px 0 25px;
+    }
+
+    .bottom_desc {
+        margin: 20px 0;
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+}

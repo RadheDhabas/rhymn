@@ -1,0 +1,175 @@
+.header {
+    position: sticky;
+    top: 0;
+    background: #000;
+    padding: 15px 0;
+    z-index: 999;
+}
+
+.header_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hmenu {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.h_items {
+    margin-left: 35px;
+}
+
+.h_items a {
+    color: #FFF;
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.h_items a:hover {
+    color: #FFF;
+}
+
+.searchbox {
+    position: relative;
+}
+
+.searchbox svg {
+    position: absolute;
+    right: 15px;
+    height: 20px;
+    width: 20px;
+    top: 8px;
+}
+
+.searchbox::before {
+    content: '';
+    position: absolute;
+    right: 42px;
+    top: 5px;
+    bottom: 5px;
+    width: 1px;
+    z-index: 1;
+    background: #000;
+}
+
+.search_input {
+    height: 35px;
+    padding: 10px 50px 10px 15px;
+    border: 1px solid #FFF;
+    border-radius: 25px;
+    width: 280px;
+    outline: none !important;
+    position: relative;
+}
+
+.mobile_header_sidemenu_bt {
+    background-color: transparent;
+    border: none;
+    display: none;
+    margin-right: 10px;
+    outline: none;
+    padding: 3px 3px 3px 0;
+}
+
+.mobile_header_sidemenu_bt svg {
+    color: #FFF;
+    fill: #FFF;
+}
+
+.m_menu {
+    list-style: none;
+    margin: 15px;
+    padding: 0;
+}
+
+.m_menu li {
+    margin-bottom: 5px;
+}
+
+.m_menu li a {
+    font-size: 14px;
+    color: #666666;
+    text-decoration: none;
+}
+.account_box{
+    position: relative;
+    cursor: pointer;
+}
+.user_option_box{
+    position: absolute;
+    top: 20px;
+    right: -5px;
+    padding: 40px 10px 0 0px;
+   display: none;
+}
+.account_box:hover .user_option_box{
+    display: block;
+}
+.user_option{
+    width: 170px;
+    border-radius: 12px;
+    background: #000;
+    padding: 5px 25px;
+}
+.ac_link{
+    color: #FFF;
+    font-size: 20px;
+    line-height: 45px;
+    font-weight: 500;
+}
+.ac_link:first-child{
+border-bottom: 1px solid #FFF;
+}
+@media(min-width:200px) and (max-width:768px) {
+    .for_pc {
+        display: none;
+    }
+
+    .mobile_header_sidemenu_bt {
+        display: inline-block;
+    }
+
+    .brand_logo img {
+        height: 30px;
+        width: auto;
+    }
+
+    .h_items a {
+        font-size: 16px;
+    }
+
+    .header {
+        padding: 8px 0;
+    }
+    .ac_link{
+        font-size: 16px;
+        line-height: 40px;
+    }
+    .user_option_box{
+        padding: 20px 0px 0 0px;
+    }
+}
+
+@media(min-width:768px) and (max-width:992px) {
+    .for_pc {
+        display: none;
+    }
+
+    .mobile_header_sidemenu_bt {
+        display: inline-block;
+    }
+
+    .brand_logo img {
+        height: 40px;
+        width: auto;
+    }
+
+    .header {
+        padding: 10px 0;
+    }
+}

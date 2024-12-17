@@ -1,0 +1,71 @@
+.comment_section {
+    padding: 0 0 40px;
+}
+
+.cmt_box textarea {
+    width: 100%;
+    border: 1px solid #666666;
+    outline: none;
+    padding: 10px;
+}
+
+.cmt_btn {
+    background: #000;
+    color: #FFf;
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+    border: 1px solid #000;
+    outline: none;
+}
+
+.old_cmt {
+    margin-top: 20px;
+    border-top: 1px solid #666666;
+    padding-top: 20px;
+}
+
+.commentoter_name {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    line-height: normal;
+    margin: 0;
+}
+
+.cmmt_date {
+    text-align: end;
+    font-size: 14px;
+    color: #666666;
+    margin: 0;
+}
+
+.cmt_text {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #666666;
+}
+
+.cmt_likes {
+    margin: 0;
+}
+
+.cmt_likes svg {
+    height: 15px;
+    margin-right: 10px;
+}
+
+.cmt_likes span {
+    line-height: 18px;
+}
+@media (min-width:200px) and (max-width:768px){
+    .commentoter_name{
+        font-size: 14px;
+    }
+    .cmt_text{
+        font-size: 14px;
+    }
+    .cmt_likes span{
+        font-size: 14px;
+    }
+}

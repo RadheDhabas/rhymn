@@ -1,26 +1,65 @@
-.what_new {
-    padding: 50px 0;
+.for_mobile {
+    display: none;
 }
 
-.slider {
-    margin-top: 16px;
+.for_pc {
+    display: block;
+}
+
+.artist_details {
+    padding: 70px 0 40px;
+}
+
+.artist_name {
+    font-size: 70px;
+    line-height: normal;
+    font-weight: 700;
+    color: #000;
     position: relative;
 }
 
-.item_name {
+.artist_name svg {
+    position: absolute;
+    top: 5px;
+}
+
+.artist_uname {
+    color: #706C6C;
+    font-size: 20px;
+    font-weight: 700;
+
+}
+
+.artist_img img {
+    border-radius: 100%;
+}
+
+.share_btn svg {
+    height: 17px;
+    position: relative;
+    top: -2px;
+}
+
+.share_btn button {
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    outline: none !important;
+    background: transparent;
+}
+
+.abt_artist {
+    margin-top: 20px;
+    padding: 40px 0 0;
+    border-top: 2px solid #000;
+}
+
+.abt_text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    line-height: 26px;
     margin: 5px 0 0;
-}
-
-.item_name a {
-    text-decoration: none;
-    font-size: 16px !important;
-    line-height: normal;
-    color: #000 !important;
-    font-weight: 600;
-}
-
-.slider {
-    margin-top: 35px;
 }
 
 .charts {
@@ -109,48 +148,37 @@
     padding: 8px 35px;
 }
 
-.community {
-    padding: 50px 0;
-    background: #000;
+.popular_album {
+    padding: 0px;
 }
 
-.comunity_img {
-    text-align: center;
+.popular_album_list {
+    margin: 40px 0 20px;
 }
 
-.community_header {
-    font-size: 38px;
-    font-weight: 700;
-    color: #fff;
+.sl_item {
+    margin: 0 0 20px;
 }
 
-.comm_text {
-    font-size: 20px;
-    font-weight: 500;
-    color: #fff;
-    margin: 22px 0 30px;
+.item_name {
+    margin: 8px 0 0;
 }
 
-.learnm_btn,
-.join_btn {
-    display: inline-block;
-    background: #fff;
-    color: #000;
-    font-size: 18px;
-    font-weight: 600;
-    padding: 8px 0;
-    text-align: center;
-    border-radius: 50px;
+.item_name a {
     text-decoration: none;
-    width: 170px;
-}
-
-.join_btn {
-    margin-right: 30px;
+    font-size: 16px !important;
+    line-height: normal;
+    color: #000 !important;
+    font-weight: 600;
 }
 
 .popular_artist {
     padding: 50px 0;
+}
+
+.slider {
+    margin-top: 35px;
+    position: relative;
 }
 
 .pop_artist_name {
@@ -166,11 +194,20 @@
     font-weight: 500;
 }
 
-.comm2 {
-    padding: 0 0 40px;
-}
-
 @media (min-width:200px) and (max-width:768px) {
+    .for_pc {
+        display: none;
+    }
+
+    .for_mobile {
+        display: block;
+    }
+
+    .share_btn button {
+        margin-top: 20px;
+        font-size: 14px;
+    }
+
     .chart_img {
         margin: 0 15px;
     }
@@ -197,74 +234,13 @@
         margin-right: 8px;
     }
 
-    .community {
-        padding: 0px 0 40px;
-    }
-
-    .comunity_img {
-        margin-bottom: 25px;
-    }
-
-    .community_header {
-        text-align: center;
-        font-size: 22px;
-        line-height: 36px;
-        font-weight: 600;
-    }
-
-    .comm_text {
-        font-size: 18px;
-        text-align: center;
-        margin: 16px 0 24px;
-    }
-
-    .learnm_btn,
-    .join_btn {
-        font-size: 16px;
-        padding: 7px 0;
-        border-radius: 50px;
-        width: 140px;
-    }
-
-    .join_btn {
-        margin-right: 20px;
-    }
-
-    .comunity_img {
-        text-align: center;
-    }
-
-    .comunity_img img {
-        width: 90%;
-    }
-
     .load_more_btn {
         font-size: 16px;
         padding: 6px 20px;
     }
 
-    .what_new {
-        padding: 30px 0 50px;
-    }
-
-    .slider {
-        margin-top: 25px;
-    }
-
-    .sl_item .item_img {
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-    }
-
-    .item_name a {
-        font-size: 14px !important;
-        font-weight: 500;
-        line-height: 21px;
-    }
-
     .charts {
-        padding: 30px 0 40px;
+        padding: 25px 0 10px;
     }
 
     .chart_head {
@@ -312,16 +288,72 @@
         font-size: 14px;
     }
 
+    .slider {
+        margin-top: 25px;
+    }
+
+    .sl_item .item_img {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+    }
+
+    .item_name a {
+        font-size: 14px !important;
+        font-weight: 500;
+        line-height: 21px;
+    }
+
     .pop_artist_name a {
         font-size: 14px !important;
         line-height: 21px;
     }
 
-    .comm2 {
-        padding: 40px 0 40px;
+    .popular_album {
+        margin: 25px 0 10px;
+    }
+
+    .artist_details {
+        padding: 35px 0 0;
+    }
+
+    .artist_name {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .artist_name svg {
+        height: 12px;
+        width: auto;
+        top: 0;
+    }
+
+    .artist_uname {
+        font-size: 12px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .artist_uname img {
+        height: 15px;
+        width: auto;
+    }
+
+    .abt_artist {
+        padding: 25px 0 0;
+    }
+
+    .abt_text {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .popular_album_list {
+        margin: 30px 0 10px;
     }
 
     .popular_artist {
-        padding: 30px 0 50px;
+        padding: 25px 0 65px;
     }
 }

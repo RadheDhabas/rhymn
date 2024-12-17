@@ -1,0 +1,118 @@
+.all_song {
+    padding: 40px 0;
+}
+
+.header {
+    margin: 0;
+    font-size: 75px;
+    line-height: 80px;
+    font-weight: 700;
+    color: #000;
+}
+
+.tabs {
+    margin: 35px 0;
+}
+
+.tab_btn {
+    color: #666666 !important;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+    text-decoration: none;
+    margin-right: 25px;
+    transition: all 0.3s;
+}
+
+.tab_btn.active {
+    color: #000 !important;
+    position: relative;
+}
+
+.tab_btn.active::after {
+    height: 2px;
+    background: #000;
+    width: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -5px;
+    content: '';
+}
+
+.songs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.song_item {
+    margin: 0 25px 25px 0;
+}
+
+.song_name {
+    margin: 8px 0 5px;
+    line-height: 16px;
+}
+.song_name a{
+    text-decoration: none;
+    font-size: 16px !important;
+    line-height: normal;
+    color: #000 !important;
+    font-weight: 600;
+}
+
+.artist_name{
+    color: #666666;
+    display: block;
+    font-size: 12px;
+    line-height: normal;
+    text-decoration: none;
+}
+.load_more_btn {
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 50px;
+    outline: none !important;
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 8px 35px;
+}
+
+@media (min-width:200px) and (max-width:768px){
+    .header{
+        font-size: 32px;
+        line-height: normal;
+    }
+    .all_song{
+        padding: 25px 0 35px;
+    }
+    .song_name a{
+        font-size: 14px !important;
+        font-weight: 500;
+        line-height: 21px;
+    }
+    .song_item{
+        margin: 0 0px 25px 0;
+    }
+    .song_img img{
+        width: 100px;
+        height: 100px;
+    }
+    .song_name{
+        margin-bottom: 3px;
+    }
+    .tabs{
+        margin: 25px 0 30px;
+    }
+    .tab_btn{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .load_more_btn{
+        font-size: 16px;
+        padding: 6px 20px;
+    }
+}
