@@ -5,8 +5,6 @@ import { z } from "zod";
 
 
 const getUser = async (email: string) => {
-  // Replace this with your actual database query logic
-  // Example: Fetch user by email from a database
   return {
     id: "123",
     email: email,
@@ -49,9 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const { email, password } = parsedCredentials.data;
 
           const user = await getUser(email);
-          console.log(user);
           if (!user) return null;
-
           return {
             id: user.id,
             email: user.email,
@@ -62,8 +58,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           };
 
         }
-
-        console.log("Invalid credentials");
         return null;
       },
     }),
@@ -83,6 +77,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     session({ session, token }) {
       return session
     },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) {
+        // Append base URL to the relative URL
+        return `${baseUrl}${url}`;
+      }
+      return url; 
+    }
   },
   pages: {
     signIn: "/sign-in",

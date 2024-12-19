@@ -11,7 +11,14 @@ export async function authenticate(
   formData: FormData,
 ) {
   try {
-    await signIn('credentials', formData,{ redirectTo: "/" });
+    const formdata = Object.fromEntries(formData.entries());
+
+    const result = await signIn('credentials', { 
+      redirect: true, 
+      ...formdata,
+      redirectTo: '/'
+    });
+    console.log("result: ", result);
   } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
