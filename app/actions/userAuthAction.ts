@@ -1,41 +1,93 @@
 'use server';
 
 import { signIn, signOut } from '@/auth';
-import { AuthError } from 'next-auth';
-import { redirect } from 'next/navigation';
-
-// ...   prevState: string | undefined,
+import { PrismaClient } from '@prisma/client'
+import { Resend } from 'resend'
+import bcrypt from 'bcryptjs';
+const prisma = new PrismaClient()
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function authenticate(
   prevState: string | undefined,
-  formData: FormData,
+  formData: FormData
 ) {
   try {
     const formdata = Object.fromEntries(formData.entries());
 
-    const result = await signIn('credentials', { 
-      redirect: true, 
+    return await signIn('credentials', {
+      redirect: true,
       ...formdata,
       redirectTo: '/'
     });
-    console.log("result: ", result);
   } catch (error) {
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case 'CredentialsSignin':
-          return 'Invalid credentials.';
-        default:
-          return 'Something went wrong.';
-      }
-    }
+    console.error("Error while signing in...", error);
     throw error;
   }
 }
+
 export async function signout() {
   try {
-    await signOut();
+    return await signOut();
   }
   catch (error) {
     console.log("Error in sign out", error);
+  }
+}
+// sign up a user
+export async function signup(prevState: { message: string, step: number } | undefined,
+  formData: FormData) {
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  // Generate OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const otpExpiresAt = new Date(Date.now() + 300000);
+  const existingUser = await prisma.user.findUnique({ where: { email } });
+  if (existingUser) {
+    return { message: "User is already registered!", step: 1 };
+  }
+  try {
+    const userData = {
+      "email": email,
+      "password": hashedPassword,
+      "otp": otp,
+      "otpExpiresAt": otpExpiresAt,
+    }
+    const user = await prisma.user.create({
+      data: userData,
+    });
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: email,
+      subject: 'Your OTP Code',
+      text: `Your OTP is ${otp}. It is valid for 5 minutes.`,
+    })
+    return { message: user.email, step: 2 };
+  } catch (error) {
+    console.error("error in sign up: ", error);
+    throw error;
+  }
+}
+
+// verify otp
+export async function verifyWithOtp(initialstate: string | undefined, formData: FormData) {
+  const email = formData.get('email') as string;
+  const otp = formData.get('otp');
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user?.otpExpiresAt) {
+      return 'OTP has expired';
+    }
+    if (user?.otp == otp) {
+      await prisma.user.update({ where: { email }, data: { otp: null, otpExpiresAt: null } });
+      return "otp verified"
+    }
+    else {
+      return "OTP is incorrect."
+    }
+  } catch (error) {
+    console.error("error in otp verifying");
+    throw error;
   }
 }

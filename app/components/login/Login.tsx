@@ -2,13 +2,10 @@
 import { authenticate } from '@/app/actions/userAuthAction';
 import { StyleType } from '@/app/types/Style.type';
 import Link from 'next/link';
-import { useActionState, useEffect } from 'react';
+import { useActionState } from 'react';
 
 function Login({ styles }: { styles: StyleType }) {
-    const [errorMessage, formAction, isPending] = useActionState(
-        authenticate,
-        undefined,
-    );
+    const [errorMessage, formAction, isPending] = useActionState(authenticate, undefined);
     return (
         <div className='text-center'>
             <form action={formAction} className="" >

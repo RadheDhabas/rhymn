@@ -1,68 +1,123 @@
+'use client'
 import { StyleType } from '@/app/types/Style.type';
 import Link from 'next/link';
+import { useActionState, useEffect, useState } from 'react';
+import { signup, verifyWithOtp } from '../actions/userAuthAction';
 
 function SignUp({ styles }: { styles: StyleType }) {
-
+    const [errorMessage, formAction, isPending] = useActionState(signup, undefined);
+    const [output, otpFormVerify, pending] = useActionState(verifyWithOtp, undefined);
+    const [verifyOtp, setVerifyOtp] = useState(1);
+   
+    useEffect(() => {
+        if (errorMessage?.step) {
+            setVerifyOtp(errorMessage.step);
+        }
+    })
     return (
         <div className='text-center'>
-            <form className="" >
-                <div className={styles.label_input}>
-                    <label
+            {verifyOtp == 1 &&
+                <form className="" action={formAction}>
+                    <div className={styles.label_input}>
+                        <label
+                            className=""
+                            htmlFor="email"
+                        >
+                            Email address
+                        </label>
+                        <div className="relative">
+                            <input
+                                className=""
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                required
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.label_input}>
+                        <label
+                            className=""
+                            htmlFor="password"
+                        >
+                            Password
+                        </label>
+                        <div className="relative">
+                            <input
+                                className=""
+                                id="password"
+                                type="password"
+                                name="password"
+                                placeholder="Enter password"
+                                required
+                                minLength={6}
+                            />
+                        </div>
+
+                    </div>
+
+                    <button type='submit' className={styles.login_button} disabled={isPending}>
+                        {isPending ? "Sign up..." : "Sign up"}
+                    </button>
+                    <div
                         className=""
-                        htmlFor="email"
+                        aria-live="polite"
+                        aria-atomic="true"
                     >
-                        Email address
-                    </label>
-                    <div className="relative">
+                    </div>
+                    <p className={styles.sign_up_text}>
+                        Already have an account? <Link href={'/sign-in'}>Sign in</Link>
+                    </p>
+                </form>}
+            {
+                verifyOtp == 2 &&
+                <form className="" action={otpFormVerify}>
+                    <div className={styles.label_input}>
+                        <label
+                            className=""
+                            htmlFor="email"
+                        >
+                            Enter Received otp on email.
+                        </label>
+                        <div className="relative">
+                            <input
+                                className=""
+                                id="otp"
+                                type="text"
+                                name="otp"
+                                placeholder="OTP"
+                                required
+                            />
+                        </div>
                         <input
                             className=""
                             id="email"
                             type="email"
                             name="email"
-                            placeholder="Enter your email address"
-                            required
+                            value={errorMessage?.message}
+                            hidden
                         />
                     </div>
-                </div>
-                <div className={styles.label_input}>
-                    <label
+                    <button type='submit' className={styles.login_button}>
+                        {isPending ? "Verifying..." : "Verify OTP"}
+                    </button>
+                    <div
                         className=""
-                        htmlFor="password"
+                        aria-live="polite"
+                        aria-atomic="true"
                     >
-                        Password
-                    </label>
-                    <div className="relative">
-                        <input
-                            className=""
-                            id="password"
-                            type="password"
-                            name="password"
-                            placeholder="Enter password"
-                            required
-                            minLength={6}
-                        />
-                    </div>
-
-                </div>
-                
-                <button type='submit' className={styles.login_button}>
-                    Sign up
-                </button>
-                <div
-                    className=""
-                    aria-live="polite"
-                    aria-atomic="true"
-                >
-                    {/* {errorMessage && (
+                        {/* {errorMessage && (
                             <>
                                 <p className="">{errorMessage}</p>
                             </>
                         )} */}
-                </div>
-                <p className={styles.sign_up_text}>
-                    Already have an account? <Link href={'/sign-in'}>Sign in</Link>
-                </p>
-            </form>
+                    </div>
+                    <p className={styles.sign_up_text}>
+                        Already have an account? <Link href={'/sign-in'}>Sign in</Link>
+                    </p>
+                </form>
+            }
         </div>
     )
 }
