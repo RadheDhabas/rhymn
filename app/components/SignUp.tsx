@@ -3,15 +3,20 @@ import { StyleType } from '@/app/types/Style.type';
 import Link from 'next/link';
 import { useActionState, useEffect, useState } from 'react';
 import { signup, verifyWithOtp } from '../actions/userAuthAction';
+import { useRouter } from 'next/navigation';
 
 function SignUp({ styles }: { styles: StyleType }) {
     const [errorMessage, formAction, isPending] = useActionState(signup, undefined);
     const [output, otpFormVerify, pending] = useActionState(verifyWithOtp, undefined);
     const [verifyOtp, setVerifyOtp] = useState(1);
-   
+    const router = useRouter();
+    console.log("output after otp: " + output);
     useEffect(() => {
         if (errorMessage?.step) {
             setVerifyOtp(errorMessage.step);
+        }
+        if (output) {
+            router.replace('/sign-in');
         }
     })
     return (
