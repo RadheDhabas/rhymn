@@ -53,6 +53,7 @@
     padding: 40px 0 0;
     border-top: 2px solid #000;
 }
+
 .abt_text {
     font-size: 16px;
     font-weight: 500;
@@ -60,7 +61,8 @@
     line-height: 26px;
     margin: 5px 0 0;
 }
-.edit_profilebtn{
+
+.edit_profilebtn {
     background: transparent;
     border: none !important;
     color: #000;
@@ -70,36 +72,149 @@
     margin-left: 20px;
     text-decoration: underline;
 }
-.stats{
+
+.stats {
     padding: 0 0 50px;
 }
-.stat_item{
-display: flex;
-flex-wrap: wrap;
-margin: 25px 0 0;
-text-align: center;
+
+.stat_item {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 25px 0 0;
+    text-align: center;
 }
-.sbox{
-border: 2px solid #000;
-border-radius: 20px;
-padding: 10px 0 0;
-margin: 0 15px 0 0;
-width: 125.5px;
+
+.sbox {
+    border: 2px solid #000;
+    border-radius: 20px;
+    padding: 10px 0 0;
+    margin: 0 15px 0 0;
+    width: 125.5px;
 }
-.statcount{
-font-size: 26px;
-font-weight: 700;
-margin: 5px 0 5px;
+
+.statcount {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 5px 0 5px;
 }
-.stat_name{
-font-size: 12px;
-line-height: 30px;
-margin: 0;
-color: #000;
-border-top: 2px solid #000;
-padding: 0 15px;
+
+.stat_name {
+    font-size: 12px;
+    line-height: 30px;
+    margin: 0;
+    color: #000;
+    border-top: 2px solid #000;
+    padding: 0 15px;
 }
-@media (min-width:200px) and (max-width:768px){
+
+.cont_items {
+    margin: 20px 0;
+}
+
+.con_box {
+    border: 2px solid #000;
+    padding: 12px 15px;
+    border-radius: 20px;
+    margin: 0 0 25px;
+}
+
+.cont_date {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    line-height: 24px;
+    padding: 0 5px 5px 5px;
+    border-bottom: 2px solid #000;
+}
+
+.cont_date svg {
+    height: 20px;
+    width: 20px;
+}
+
+.contnam {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+}
+
+.cont_sa_nam,
+.cont_sa_nam a {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    line-height: 26px;
+    margin: 0;
+    text-decoration: none;
+}
+
+.ts_di {
+    margin: 0 10px 0 0;
+}
+
+.ts_detail {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 0;
+}
+
+.ts_in_a {
+    padding: 0 0 10px 5px;
+    border-bottom: 2px solid #000;
+}
+
+.ts_in {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.ts_a {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14px;
+    color: #666666;
+    margin: 0;
+}
+
+.ts2_detail {
+    padding: 5px 0 0;
+}
+
+.ts_h {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000;
+    background: #D9D9D9;
+}
+
+.revT {
+    margin-left: 10px;
+    color: #39045E;
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+.tshc {
+    margin: 10px 0 0;
+}
+
+.ts_dec {
+    margin: 10px 0 0;
+    font-size: 13px;
+    font-weight: 300;
+    color: #000;
+}
+.likeCmt{
+    
+}
+
+@media (min-width:200px) and (max-width:768px) {
     .for_pc {
         display: none;
     }
@@ -112,6 +227,7 @@ padding: 0 15px;
         margin-top: 20px;
         font-size: 14px;
     }
+
     .profile_details {
         padding: 35px 0 0;
     }
@@ -147,28 +263,34 @@ padding: 0 15px;
         font-size: 14px;
         line-height: 24px;
     }
-    .stats{
+
+    .stats {
         padding: 30px 0 30px;
     }
-    .stat_item{
+
+    .stat_item {
         justify-content: center;
     }
-    .sbox{
+
+    .sbox {
         margin: 0 8px 16px;
         border-radius: 10px;
         padding: 5px 0 0;
         width: 100px;
     }
-    .stat_icon svg{
+
+    .stat_icon svg {
         height: 18px;
         width: auto;
     }
-    .stat_name{
+
+    .stat_name {
         font-size: 10px;
         line-height: 24px;
         padding: 0;
     }
-    .statcount{
+
+    .statcount {
         font-size: 18px;
         line-height: 27px;
         margin: 0;

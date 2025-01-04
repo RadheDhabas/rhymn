@@ -1,20 +1,10 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-
+import { JWT } from "next-auth/jwt";
+import { AdapterUser } from "next-auth/adapters";
 import { z } from "zod";
-
-
-const getUser = async (email: string) => {
-  return {
-    id: "123",
-    email: email,
-    password: "$2b$10$somehashedpassword",
-    name: "John Doe",
-    image: "/path/to/image",
-    userId: "uniqueUserId",
-    isEmailVerified: true,
-  };
-};
+import { getUser } from "./app/actions/userAuthAction";
+import { UserType } from "./app/types/user";
 
 // Helper function to generate an access token
 const generateAccessToken = async ({
@@ -31,34 +21,59 @@ const generateAccessToken = async ({
   return `newAccessToken-${user.id}-${Date.now()}`;
 };
 
+declare module "next-auth" {
+  interface User extends UserType {}
+}
+
+declare module "next-auth/adapters" {
+  interface AdapterUser extends UserType {}
+}
+
+declare module "next-auth/jwt" {
+  interface JWT extends UserType {}
+}
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       name: "Credentials",
-      async authorize(credentials) {
-        // Validate input using zod schema
-        const parsedCredentials = z
-          .object({
-            email: z.string().email(),
-            password: z.string().min(6),
-          })
-          .safeParse(credentials);
-        if (parsedCredentials.success) {
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials){
+        try {
+          // Validate input using zod schema
+          const parsedCredentials = z
+            .object({
+              email: z.string().email(),
+              password: z.string().min(6),
+            })
+            .safeParse(credentials);
+
+          if (!parsedCredentials.success) {
+            return null;
+          }
+
           const { email, password } = parsedCredentials.data;
 
-          const user = await getUser(email);
-          if (!user) return null;
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            image: user.image,
-            userId: user.userId,
-            isEmailVerified: user.isEmailVerified,
-          };
-
+          const userInfo = await getUser(email, password);
+          if (!userInfo || userInfo.success === false) {
+            return null;
+          }
+          if (userInfo.user) {
+            return {
+              id: userInfo.user.id.toString(),
+              email: userInfo.user.userEmail,
+              name: userInfo.user.name,
+              image:userInfo.user.avatarUrl
+            };
+          }
+          return null;
+        } catch (error) {
+          console.error('Error in authorize function:', error);
+          return null;
         }
-        return null;
       },
     }),
   ],
@@ -72,9 +87,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return true;
     },
     jwt({ token, user }) {
-      return token
+      if (user) {
+        token.id = user.id?.toString() || "";
+        token.email = user.email || "";
+        token.name = user.name || "Unknown";
+        token.image = user.image || ""; 
+      }
+      return token;
     },
-    session({ session, token }) {
+    async session({ session, token }) {
+      if (token) {
+        session.user = {
+          id: token.id, // Ensure ID is a string
+          email: token.email || "", // Ensure email is a string
+          name: token.name || "Unknown", // Fallback for name
+          image: token.image || "",
+          emailVerified: null,
+        };
+      }
       return session
     },
     async redirect({ url, baseUrl }) {
@@ -82,7 +112,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         // Append base URL to the relative URL
         return `${baseUrl}${url}`;
       }
-      return url; 
+      return url;
     }
   },
   pages: {

@@ -96,7 +96,7 @@ export async function signup(prevState: { message: string, step: number } | unde
     })
     return { message: user.email, step: 2 };
   } catch (error) {
-    console.error("error in sign up: ", error);
+    console.log("error in sign up: ", error);
     throw error;
   }
 }
@@ -129,4 +129,22 @@ export async function verifyWithOtp(initialstate: boolean | undefined, formData:
     console.error("error in otp verifying");
     throw error;
   }
+}
+
+// check user for login
+export async function getUser(email: string, password: string): Promise<{ success: boolean; message: string; user?: { id: number; userEmail: string; name: string | null; avatarUrl:string | null } }> {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) {
+    return Promise.resolve({ success: false, message: 'Email is not registered' });
+  }
+  const passwordsMatch = await bcrypt.compare(password, user?.password);
+  if (!passwordsMatch) {
+    return Promise.resolve({ success: false, message: 'Incorrect password' });
+  }
+  const { id, email: userEmail, name,avatarUrl } = user;
+  return Promise.resolve({
+    success: true,
+    message: 'Login successful',
+    user: { id, userEmail, name, avatarUrl },
+  });
 }

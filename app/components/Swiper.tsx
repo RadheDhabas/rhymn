@@ -10,7 +10,7 @@ import 'swiper/css/scrollbar';
 import 'swiper/css';
 import { ReactNode, useEffect, useRef } from 'react';
 import React from 'react';
-
+import { NavigationOptions } from 'swiper/types';
 interface MySliderProps {
     children: ReactNode,
     slidesPerView: number[],
@@ -20,47 +20,10 @@ interface MySliderProps {
 function MySlider({ children, slidesPerView, spaceBetween }: MySliderProps) {
     const prevRef = useRef<HTMLButtonElement>(null);
     const nextRef = useRef<HTMLButtonElement>(null);
-
+    useEffect(() => {
+        // This effect runs after the refs are attached to the buttons
+    }, []);
     return (<>
-        <Swiper
-            spaceBetween={spaceBetween[0]}
-            slidesPerView={slidesPerView[0]}
-            breakpoints={{
-                // when window width is >= 640px
-                640: {
-                  slidesPerView: slidesPerView[1],
-                  spaceBetween: spaceBetween[1],
-                },
-                // when window width is >= 768px
-                768: {
-                  slidesPerView: slidesPerView[2],
-                  spaceBetween: spaceBetween[2],
-                },
-                // when window width is >= 1024px
-                1024: {
-                  slidesPerView: slidesPerView[3],
-                  spaceBetween: spaceBetween[3],
-                },
-              }}
-            modules={[Navigation, Pagination]}
-            navigation={{
-                prevEl: prevRef?.current, // Assign the prev button ref
-                nextEl: nextRef?.current, // Assign the next button ref
-            }}
-            onInit={swiper => {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                // eslint-disable-next-line no-param-reassign
-                swiper.params.navigation.prevEl = prevRef.current
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                // eslint-disable-next-line no-param-reassign
-                swiper.params.navigation.nextEl = nextRef.current
-                swiper.navigation.update()
-              }}
-        >
-            {children}
-        </Swiper>
         <button ref={prevRef} className='custom-prev'>
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16 1C7.71573 1 1 7.71573 1 16C1 24.2843 7.71573 31 16 31C24.2843 31 31 24.2843 31 16C31 7.71573 24.2843 1 16 1Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -73,6 +36,51 @@ function MySlider({ children, slidesPerView, spaceBetween }: MySliderProps) {
                 <path d="M14.3334 21L19.3334 16L14.3334 11" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
         </button>
+        <Swiper
+
+            modules={[Navigation, Pagination]}
+            
+            onBeforeInit={(swiper) => {
+                if (swiper.params.navigation) {
+                  // Assert that navigation is of type NavigationOptions
+                  const navigation = swiper.params.navigation as NavigationOptions;
+                  navigation.prevEl = prevRef.current;
+                  navigation.nextEl = nextRef.current;
+                }
+              }}
+              onInit={(swiper) => {
+                if (swiper.params.navigation) {
+                  swiper.navigation.init();
+                  swiper.navigation.update();
+                }
+              }}
+            navigation={{
+                prevEl: prevRef?.current, // Assign the prev button ref
+                nextEl: nextRef?.current, // Assign the next button ref
+            }}
+            spaceBetween={spaceBetween[0]}
+            slidesPerView={slidesPerView[0]}
+            breakpoints={{
+                // when window width is >= 640px
+                640: {
+                    slidesPerView: slidesPerView[1],
+                    spaceBetween: spaceBetween[1],
+                },
+                // when window width is >= 768px
+                768: {
+                    slidesPerView: slidesPerView[2],
+                    spaceBetween: spaceBetween[2],
+                },
+                // when window width is >= 1024px
+                1024: {
+                    slidesPerView: slidesPerView[3],
+                    spaceBetween: spaceBetween[3],
+                },
+            }}
+        >
+            {children}
+        </Swiper>
+
     </>
 
     );

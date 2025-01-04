@@ -95,14 +95,7 @@ function SignUp({ styles }: { styles: StyleType }) {
                                 required
                             />
                         </div>
-                        <input
-                            className=""
-                            id="email"
-                            type="email"
-                            name="email"
-                            value={errorMessage?.message}
-                            hidden
-                        />
+                        <input type="hidden" name="email" value={errorMessage?.message} />
                     </div>
                     <button type='submit' className={styles.login_button}>
                         {isPending ? "Verifying..." : "Verify OTP"}
