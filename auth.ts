@@ -50,7 +50,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               password: z.string().min(6),
             })
             .safeParse(credentials);
-
           if (!parsedCredentials.success) {
             return null;
           }

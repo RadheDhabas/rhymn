@@ -1,0 +1,126 @@
+.add_lyrics {
+    background: #000;
+    padding: 70px 0 0;
+}
+
+.banner_head {
+    font-size: 70px;
+    line-height: 80px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.banner_subt {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #fff;
+    margin: 10px 0 50px;
+}
+
+.content {
+    padding: 50px 0 0;
+    border-top: 2px solid #FFF;
+}
+
+.lyrcH {
+    font-size: 42px;
+    line-height: 60px;
+    color: #FFF;
+    margin: 0;
+    font-weight: 700;
+}
+
+.lyricsSs {
+    font-size: 22px;
+    line-height: 36px;
+    color: #FFF;
+    font-weight: 600;
+    margin: 25px 0 5px;
+}
+
+.label {
+    font-size: 18px;
+    line-height: 30px;
+    color: #FFF;
+    margin: 0 0 5px;
+}
+
+.inputs {
+    margin-bottom:18px;
+}
+
+.inputs:focus {
+    box-shadow: none !important;
+}
+
+.checks {
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 100%;
+    border: 2px solid #FFF;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    vertical-align: middle;
+    margin: 0 6px 0 0;
+}
+
+.checks:checked {
+    background: #FFF;
+}
+
+.checks::before {
+    display: none;
+}
+
+.checks:checked::before {
+    display: block;
+    content: "";
+    height: 14px;
+    width: 14px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background: #FFF;
+}
+.check_label{
+    font-size: 15px;
+    font-weight: 500;
+    color: #FFF;
+    vertical-align: middle;
+    margin: 0 25px 0 0;
+}
+.dcbox{
+    font-size: 14px;
+    font-weight: 500;
+    color: #827E7E;
+    margin: 18px 0 20px;
+}
+.submit_btn{
+    border: 2px solid #FFF;
+    border-radius: 10px;
+    padding: 7px 35px;
+    font-size: 16px;
+    color: #FFF;
+    background: #000;
+    font-weight: 500;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+@media (min-width:200px) and (max-width:768px) {
+    .add_lyrics {
+        padding: 30px 0 0;
+    }
+
+    .banner_head {
+        font-size: 32px;
+        line-height: 48px;
+    }
+
+    .banner_subt {
+        margin: 10px 0 30px;
+    }
+}

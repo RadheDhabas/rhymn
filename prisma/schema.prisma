@@ -15,11 +15,18 @@ datasource db {
 
 // model started
 
+enum UserRole {
+  ADMIN
+  MODERATOR
+  USER
+}
 model User {
-  id           Int      @id @default(autoincrement())
+  id           String   @id @default(uuid()) @db.Uuid
   name         String?
   email        String   @unique
+  username     String   @unique
   password     String?
+  role         UserRole @default(USER)
   googleId     String?
   otp          String?
   otpExpiresAt DateTime?
@@ -29,4 +36,56 @@ model User {
   avatarUrl    String?
   googleAccessToken String?
   googleRefreshToken String?
+}
+
+model Song {
+  id          String   @id @default(uuid()) @db.Uuid
+  title       String
+  lyrics      String
+  sortDesc    String?
+  releaseDate DateTime
+  album       Album?    @relation(fields: [albumId], references: [id])
+  albumId     String?   @db.Uuid
+  cloudUrl    String?
+  youtubeUrl  String?
+  image       String?
+  instrumentPlayers String?
+  artists     Artist[]  @relation("SongArtists")
+  featuring   Artist[]  @relation("SongFeaturing")
+  tags        Tag[]     @relation("SongTags")
+  categories  Category[] @relation("SongCategories")
+  producedBy  String?
+  writtenBy   Writer[]   @relation("SongWriters")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Artist {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String  @unique
+  songs     Song[]  @relation("SongArtists")
+  features  Song[]  @relation("SongFeaturing")
+}
+
+model Tag {
+  id    String   @id @default(uuid()) @db.Uuid
+  name  String @unique
+  songs Song[] @relation("SongTags")
+}
+
+model Writer {
+  id    String   @id @default(uuid()) @db.Uuid
+  name  String @unique
+  songs Song[] @relation("SongWriters")
+}
+model Album {
+  id    String   @id @default(uuid()) @db.Uuid
+  name  String  @unique
+  songs Song[]
+}
+
+model Category {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String    @unique
+  songs        Song[]    @relation("SongCategories")
 }

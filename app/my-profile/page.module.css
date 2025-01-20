@@ -107,6 +107,10 @@
     padding: 0 15px;
 }
 
+.contribution {
+    padding: 0 0 30px;
+}
+
 .cont_items {
     margin: 20px 0;
 }
@@ -210,8 +214,24 @@
     font-weight: 300;
     color: #000;
 }
-.likeCmt{
-    
+
+.likeCmt {
+    margin: 10px 0 0;
+    line-height: 16px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.likeCmt svg {
+    max-height: 18px;
+    margin-right: 5px;
+}
+
+.likeCmt span {
+    vertical-align: middle;
+    margin-right: 15px;
+    line-height: 16px;
 }
 
 @media (min-width:200px) and (max-width:768px) {

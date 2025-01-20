@@ -1,10 +1,13 @@
 import LyricsDetails from '@/app/components/LyricsDetails/LyricsDetails';
 import styles from './page.module.css';
+import { getLyricById } from '@/app/actions/lyricsAction';
 
-function page({params}:{params:{slug:string}}) {
+
+async function page({params}:{params:{slug:string}}) {
+ const sondData = await getLyricById(params.slug);
   return (
     <>
-    <LyricsDetails styles={styles} />
+    <LyricsDetails styles={styles} songdata={sondData}/>
     </>
   )
 }

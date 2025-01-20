@@ -2,8 +2,11 @@ import { StyleType } from "@/app/types/Style.type";
 import Image from "next/image";
 import Link from "next/link";
 import LyricsComments from "./LyricsComments";
+import { Parser } from "html-to-react"
 
-function LyricsDetails({ styles }: { styles: StyleType }) {
+function LyricsDetails({ styles, songdata }: { styles: StyleType, songdata: any }) {
+    const htmlToReactParser = new Parser();
+    console.log(songdata);
     return (
         <>
             <section className={styles.lyric_detail}>
@@ -31,9 +34,13 @@ function LyricsDetails({ styles }: { styles: StyleType }) {
                                 />
                                 <div>
                                     <h1 className='main-header'>
-                                        Perfect
+                                        {songdata.title}
                                     </h1>
-                                    <Link href={'/'} className={styles.artist_name}>Ed Sheeran</Link>
+                                    {
+                                        songdata.artists?.map((artist: any) => (<>
+                                            <Link href={'/'} className={styles.artist_name}>{artist.name}</Link> {" "}
+                                            </>))
+                                    }
                                 </div>
                             </div>
                             <p className={styles.song_sdesc}>
@@ -49,57 +56,7 @@ function LyricsDetails({ styles }: { styles: StyleType }) {
                                     HYMN ALONG
                                 </p>
                                 <div>
-                                    I found a love for me<br />
-                                    Oh, darlin', just dive right in and follow my lead<br />
-                                    Well, I found a girl, beautiful and sweet<br />
-                                    Oh, I never knew you were the someone waitin' for me
-                                    <br /><br />
-                                    'Cause we were just kids when we fell in love<br />
-                                    Not knowing what it was<br />
-                                    I will not give you up this time<br />
-                                    But darling, just kiss me slow<br />
-                                    Your heart is all I own<br />
-                                    And in your eyes, you're holding mine
-                                    <br /><br />
-                                    Baby, I'm dancing in the dark<br />
-                                    With you between my arms<br />
-                                    Barefoot on the grass<br />
-                                    Listening to our favourite song<br />
-                                    When you said you looked a mess<br />
-                                    I whispered underneath my breath<br />
-                                    But you heard it<br />
-                                    Darling, you look perfect tonight
-                                    <br /><br />
-                                    Well, I found a woman, stronger than anyone I know<br />
-                                    She shares my dreams, I hope that someday I'll share her home<br />
-                                    I found a lover, to carry more than just my secrets<br />
-                                    To carry love, to carry children of our own
-                                    <br /><br />
-                                    We are still kids, but we're so in love<br />
-                                    Fighting against all odds<br />
-                                    I know we'll be alright this time<br />
-                                    Darling, just hold my hand<br />
-                                    Be my girl, I'll be your man<br />
-                                    I see my future in your eyes
-                                    <br /><br />
-                                    Baby, I'm dancing in the dark<br />
-                                    With you between my arms<br />
-                                    Barefoot on the grass<br />
-                                    Listening to our favorite song<br />
-                                    When I saw you in that dress, looking so beautiful<br />
-                                    I don't deserve this<br />
-                                    Darling, you look perfect tonight
-                                    <br /><br />
-                                    Baby, I'm dancing in the dark<br />
-                                    With you between my arms<br />
-                                    Barefoot on the grass<br />
-                                    Listening to our favorite song<br />
-                                    I have faith in what I see
-                                    <br /><br />
-                                    Now I know I have met an angel in person<br />
-                                    And she looks perfect<br />
-                                    I don't deserve this<br />
-                                    You look perfect tonight
+                                    {htmlToReactParser.parse(songdata.lyrics)}
                                 </div>
                                 <div className={styles.share_btn}>
                                     <button>

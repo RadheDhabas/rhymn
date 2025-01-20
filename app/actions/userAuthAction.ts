@@ -4,6 +4,7 @@ import { signIn, signOut } from '@/auth';
 import { PrismaClient } from '@prisma/client';
 import { Resend } from 'resend';
 import bcrypt from 'bcryptjs';
+import { AuthError } from 'next-auth';
 const prisma = new PrismaClient()
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,13 +14,24 @@ export async function authenticate(
 ) {
   try {
     const formdata = Object.fromEntries(formData.entries());
-
-    return await signIn('credentials', {
+    const result= await signIn('credentials', {
       redirect: true,
       ...formdata,
       redirectTo: '/'
     });
+    console.log(result)
+    return result;
   } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+                case "CredentialsSignin":
+                    return { msg: "Invalid credentials" , status: "error"};
+                case "CredentialsSignin":
+                    throw error;
+                default:
+                    return { msg: "Something went wrong", status: "error" };
+            }
+    }
     console.error("Error while signing in...", error);
     throw error;
   }
@@ -84,10 +96,12 @@ export async function signup(prevState: { message: string, step: number } | unde
       "password": hashedPassword,
       "otp": otp,
       "otpExpiresAt": otpExpiresAt,
+      "username": email.split('@')[0],
     }
     const user = await prisma.user.create({
       data: userData,
     });
+    console.log("userData after creating user: ", user);
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: email,

@@ -2,9 +2,9 @@ import { StyleType } from "@/app/types/Style.type"
 import Image from "next/image";
 import Link from "next/link"
 
-async function AllSongs({ styles, activeTab, currentPage }: { styles: StyleType, activeTab: string, currentPage: number }) {
+async function AllSongs({ styles, activeTab, currentPage, songs }: { styles: StyleType, activeTab: string, currentPage: number, songs: any }) {
     // const songs = await fetchSongs(activeTab, currentPage);
-    const songs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+    const songData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
     return (
         <>
             <div className={styles.tabs}>
@@ -16,10 +16,10 @@ async function AllSongs({ styles, activeTab, currentPage }: { styles: StyleType,
                 </Link>
             </div>
             <div className={styles.songs}>
-                {songs.map((item, index) => (
+                {songs && songs.map((item:any, index:any) => (
                     <div className={styles.song_item} key={index}>
                         <div>
-                            <Link href={'/'} className={styles.song_img}>
+                            <Link href={`/lyrics/${item.id}`} className={styles.song_img}>
                                 <Image src={'/images/song_img.png'} width={160} height={160} style={{ 'borderRadius': '7px' }} alt='' className='img-fluid' />
                             </Link>
                         </div>

@@ -1,8 +1,11 @@
 import { StyleType } from '@/app/types/Style.type'
+import { auth } from '@/auth'
+import { Session } from 'next-auth'
 import Image from 'next/image'
 import React from 'react'
 
-function ProfileHeader({ styles }: { styles: StyleType }) {
+function ProfileHeader({ styles,session }: { styles: StyleType, session: Session }) {
+    
     return (
         <section className={styles.profile_details}>
             <div className="container">
@@ -30,7 +33,7 @@ function ProfileHeader({ styles }: { styles: StyleType }) {
                             />
                             <div>
                                 <h1 className={styles.profile_name}>
-                                    Ed Sheeran
+                                    {session?.user?.name}
                                 </h1>
                                 <p className={styles.profile_uname}>
                                     <Image src={'/images/hymn_username_logo.png'} width={37.5} height={30} alt="" /> edsheeran
