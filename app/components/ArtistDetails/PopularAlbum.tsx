@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 
-function PopularAlbum({ styles }: { styles: StyleType }) {
+function PopularAlbum({ styles, artistdata }: { styles: StyleType,artistdata:any }) {
     const songdata = ['Perfect', "Treat You Better", "Saware", 'Perfect', "Treat You Better", "Saware", 'Perfect', "Saware"]
     return (
         <section className={styles.popular_album}>

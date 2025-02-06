@@ -5,6 +5,7 @@ import Link from "next/link"
 async function AllSongs({ styles, activeTab, currentPage, songs }: { styles: StyleType, activeTab: string, currentPage: number, songs: any }) {
     // const songs = await fetchSongs(activeTab, currentPage);
     const songData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+    console.log(songs)
     return (
         <>
             <div className={styles.tabs}>
@@ -26,11 +27,11 @@ async function AllSongs({ styles, activeTab, currentPage, songs }: { styles: Sty
                         <div>
                             <p className={styles.song_name}>
                                 <Link href={'/'}>
-                                    Perfect Zalima
+                                    {item?.title}
                                 </Link>
                             </p>
                             <Link href={'/'} className={styles.artist_name}>
-                                Perfect Zalima
+                            Arijit Singh
                             </Link>
                         </div>
                     </div>

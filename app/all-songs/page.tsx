@@ -24,7 +24,7 @@ async function Page(props: {
               <AllSongs styles= {styles} activeTab={activeTab} currentPage={currentPage} songs={songs} />
               <LoadmoreBtn styles={styles} label="Load more..." currentPage={currentPage} activeTab={activeTab}/>
             </div>
-            {JSON.stringify(songs)}
+            {/* {JSON.stringify(songs)} */}
           </div>
         </div>
       </section>

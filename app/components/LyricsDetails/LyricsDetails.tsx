@@ -1,3 +1,4 @@
+'use client'
 import { StyleType } from "@/app/types/Style.type";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +7,7 @@ import { Parser } from "html-to-react"
 
 function LyricsDetails({ styles, songdata }: { styles: StyleType, songdata: any }) {
     const htmlToReactParser = new Parser();
-    console.log(songdata);
+
     return (
         <>
             <section className={styles.lyric_detail}>
@@ -37,9 +38,8 @@ function LyricsDetails({ styles, songdata }: { styles: StyleType, songdata: any 
                                         {songdata.title}
                                     </h1>
                                     {
-                                        songdata.artists?.map((artist: any) => (<>
-                                            <Link href={'/'} className={styles.artist_name}>{artist.name}</Link> {" "}
-                                            </>))
+                                        songdata.artists?.map((artist: any,index:number) => (
+                                            <Link href={`/artists/${artist.id}`} className={styles.artist_name} key={"artist"+index}>{artist.name} {" "}</Link>))
                                     }
                                 </div>
                             </div>
@@ -59,7 +59,7 @@ function LyricsDetails({ styles, songdata }: { styles: StyleType, songdata: any 
                                     {htmlToReactParser.parse(songdata.lyrics)}
                                 </div>
                                 <div className={styles.share_btn}>
-                                    <button>
+                                    <button onClick={() => { navigator.clipboard.writeText(window.location.href)}}>
                                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M9.70234 2.72533V13.1407M13.3783 5.176L9.70234 1.5L6.02633 5.176M1.125 11.3027V17.4293C1.125 18.0793 1.38319 18.7026 1.84278 19.1622C2.30237 19.6218 2.92571 19.88 3.57567 19.88H15.829C16.479 19.88 17.1023 19.6218 17.5619 19.1622C18.0215 18.7026 18.2797 18.0793 18.2797 17.4293V11.3027" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg> SHARE

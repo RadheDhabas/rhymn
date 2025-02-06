@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import VerifiedArtist from "../VerifiedArtist"
 
-function ArtistDetails({ styles }: { styles: StyleType }) {
+function ArtistDetails({ styles, artistdata }: { styles: StyleType, artistdata:any }) {
     return ( 
         <section className={styles.artist_details}>
             <div className="container">
@@ -31,7 +31,7 @@ function ArtistDetails({ styles }: { styles: StyleType }) {
                             />
                             <div>
                                 <h1 className={styles.artist_name}>
-                                    Ed Sheeran <VerifiedArtist />
+                                    {artistdata.name} <VerifiedArtist />
                                 </h1>
                                 <p className={styles.artist_uname}>
                                     <span>Singer/Songwriter</span> <Image src={'/images/hymn_username_logo.png'} width={37.5} height={30} alt="" /> edsheeran

@@ -2,7 +2,7 @@ import { StyleType } from '@/app/types/Style.type';
 import Image from 'next/image'
 import Link from 'next/link'
 
-function PopularSong({ styles }: { styles: StyleType }) {
+function PopularSong({ styles,artistdata }: { styles: StyleType,artistdata:any }) {
     const cdata = [1, 2, 3, 4, 5];
     return (
         <section className={styles.charts}>

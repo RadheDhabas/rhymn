@@ -18,13 +18,13 @@ function PeopleLike({ styles }: { styles: StyleType }) {
                         </h2>
                     </div>
                     <div className="col-3 text-end">
-                        <Link href={'/'} className='show_all_btn'>Show all</Link>
+                        <Link href={'/artists'} className='show_all_btn'>Show all</Link>
                     </div>
                     <div className="col-12">
                         <div className={styles.slider}>
                             <MySlider slidesPerView={[3, 3, 4, 5, 6]} spaceBetween={[15, 20, 25, 30, 30]}>
                                 {popular_art.map((item, index) => (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={index+"artists"}>
                                         <div className={styles.sl_item}>
                                             <Link href={'/'} className={styles.item_img}>
                                                 <Image src={'/images/song_img.png'} width={160} height={160} style={{ 'borderRadius': '100%' }} alt='' className='img-fluid' />
